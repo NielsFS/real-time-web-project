@@ -1,0 +1,71 @@
+#searchVideos {
+	height: 10rem;
+
+	display: flex;
+	flex-direction: row;
+}
+
+.searchVideosForm {
+	width: 30%;
+	min-width: 10rem;
+	height: 100%;
+
+	display: flex;
+	flex-direction: column;
+
+	align-items: center;
+	justify-content: center;
+}
+
+.searchVideosForm input {
+	width: 80%;
+	height: 1.5rem;
+	border: 1px solid rgb(70, 69, 69);
+}
+
+.searchVideosForm button {
+	width: 80%;
+	height: 1.5rem;
+	border-radius: 0;
+	background: rgba(221, 26, 26, 0.876);
+	color: white;
+	border: 1px solid rgba(221, 26, 26, 0.876);
+}
+
+.searchVideosForm label {
+	margin-bottom: 0.7rem;
+}
+
+.searchVideosList {
+	width: 70%;
+	height: 100%;
+
+	padding: 1rem;
+
+	display: flex;
+	flex-direction: row;
+
+	overflow-x: scroll;
+
+}
+
+.searchVideosList li {
+	min-width: 10rem;
+	margin-right: 1rem;
+
+	display: flex;
+	flex-direction: column;
+
+}
+
+.previewVideo img {
+	height: 6rem;
+	width: 10rem;
+	object-fit: cover;
+
+	border-radius: 4px;
+}
+
+.previewVideo h6 {
+	margin: 0;
+}

@@ -1,9 +1,12 @@
 const express = require('express')
 const app = express()
-const exphbs = require('express-handlebars')
+const path = require('path')
+const hbs = require('express-handlebars')
 
-app.engine('handlebars', exphbs({ defaultLayout: 'main'}))
+app.engine('handlebars', hbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
+app.use(express.static('public'))
+app.set('views', path.join(__dirname, 'views'))
 
 //////////////////////////////
 // Routes
