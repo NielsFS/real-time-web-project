@@ -9,6 +9,7 @@ const mongoose = require('mongoose')
 const keys = require('./config/keys')
 const cookieSession = require('cookie-session')
 const passport = require('passport')
+const fetch = require("node-fetch")
 
 const {google} = require('googleapis')
 const queryString = require('query-string')
@@ -28,6 +29,17 @@ app.use(cookieSession({
 app.use(passport.initialize())
 app.use(passport.session())
 
+// check if user is logged in
+const authCheck = (req,res,next) => {
+	if (!req.user) {
+		res.redirect('/auth/google')
+	} else {
+		next()
+	}
+}
+
+
+
 //////////////////////////////
 // Routes
 //////////////////////////////
@@ -36,9 +48,13 @@ app.use(passport.session())
 app.use('/auth',authRoutes)
 
 // main route
-app.get('/', (req,res) => {
-		res.render('index')
+app.get('/', authCheck, (req,res) => {
+
+		res.render('index', {
+			user: req.user 
+		})
 	})
+
 
 //////////////////////////////
 // Database
