@@ -1,5 +1,7 @@
 const router = require('express').Router()
 const passport = require('passport')
+const User = require('../models/user-model')
+const fetch = require("node-fetch")
 
 
 
@@ -16,11 +18,14 @@ router.get('/logout', (req,res) => {
 
 // auth google
 router.get('/google', passport.authenticate('google', {
-	scope: ['profile', 'https://www.googleapis.com/auth/youtube']
+	scope: ['profile', 'https://www.googleapis.com/auth/youtube', 'https://www.googleapis.com/auth/youtube.readonly'],
+	accessType: 'offline',
 }))
 
 // callback route for Google redirect
 router.get('/google/redirect', passport.authenticate('google'), (req,res)=> {
+
+	
 	res.redirect('/')
 })
 

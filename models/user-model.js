@@ -5,7 +5,8 @@ const userSchema = new Schema({
 	username: String,
 	googleID: String,
 	accessToken: String,
-	refreshToken: String
+	refreshToken: String,
+	channelID: String,
 })
 
 const User = mongoose.model('user', userSchema)

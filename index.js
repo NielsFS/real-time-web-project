@@ -10,6 +10,7 @@ const keys = require('./config/keys')
 const cookieSession = require('cookie-session')
 const passport = require('passport')
 const fetch = require("node-fetch")
+const refresh = require('passport-oauth2-refresh')
 
 const {google} = require('googleapis')
 const queryString = require('query-string')
@@ -40,6 +41,8 @@ const authCheck = (req,res,next) => {
 
 
 
+
+
 //////////////////////////////
 // Routes
 //////////////////////////////
@@ -50,11 +53,70 @@ app.use('/auth',authRoutes)
 // main route
 app.get('/', authCheck, (req,res) => {
 
-		res.render('index', {
-			user: req.user 
-		})
-	})
+	let channelID = req.user.channelID
+	let testPlaylist 
+	let token = req.user.accessToken
 
+	const getData = {
+		findPlaylist: function() {
+			const playlist = `https://www.googleapis.com/youtube/v3/playlists?access_token=${token}&part=snippet%2CcontentDetails&channelId=${channelID}&maxResults=30`
+			fetch(playlist)
+			.then(response => response.json())
+			.then( function (data) {
+				// console.log(data)
+
+				let allPlaylists = data.items
+				let mappedPlaylists = allPlaylists.map( (playlists) => {
+					return {id: playlists.id, title: playlists.snippet.title}
+				} )
+				
+				function findTestPlaylist(obj) { 
+					return obj.title === 'testPlaylist';
+				}
+				
+				testPlaylist = mappedPlaylists.find(findTestPlaylist)
+			})
+		},
+		loadPlaylist: function() {
+			console.log('test:' + channelID)
+			console.log('test2:' + testPlaylist)
+			const playlist = `https://www.googleapis.com/youtube/v3/playlists?access_token=${token}&part=snippet%2CcontentDetails&channelId=${channelID}&maxResults=30`
+			fetch(playlist)
+			.then(response => response.json())
+			.then( function (data) {
+				console.log(testPlaylist)
+			})
+		},
+		renderPage: function() {
+			res.render('index', {
+				user: req.user 
+			})
+		}
+	}
+	
+	getData.findPlaylist()
+	getData.loadPlaylist()
+	getData.renderPage()
+	
+})
+	
+	
+
+app.get('/videos', (req,res) => {
+
+	let token = req.user.accessToken
+	
+	const url = `https://www.googleapis.com/youtube/v3/channels?access_token=${req.user.accessToken}&part=snippet&mine=true`
+	
+	fetch(url)
+		.then(response => response.json())
+		.then( function (data) {
+			
+			res.send(token)
+		})
+	
+	
+})
 
 //////////////////////////////
 // Database
