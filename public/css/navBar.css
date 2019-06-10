@@ -1,13 +1,65 @@
+
+h1 {
+	margin: 0;
+	color: rgb(192, 5, 36);
+}
+
+#navBar {
+	height: 4rem;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 1rem;
+	background: white;
+	box-shadow: 0px 0px 8px -1px grey;
+}
+
+#login {
+	display: flex;
+	flex-direction: row;
+
+}
+
 #login ul {
 	display: flex;
 	flex-direction: row;
-	justify-content: flex-end;
 }
 
 #login li {
-	margin-right: 1rem;
+	padding-left: 1rem;
 }
 
 #login li h4 {
 	margin: 0;
+}
+
+#login li a {
+	color:rgb(192, 5, 36);
+}
+
+
+.searchVideosForm {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	width: 35rem;
+}
+
+.searchVideosForm input {
+	width: 100%;
+	height: 2rem;
+	border: 1px solid lightgray;
+	outline: none;
+	padding-left: 1rem;
+}
+.searchVideosForm button {
+	width: 2rem;
+	height: 2rem;
+	border: 1px solid lightgray;
+	border-left: none;
+	background: lightgray;
+	border-radius: 0;
+	cursor: pointer;
 }

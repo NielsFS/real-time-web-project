@@ -1,54 +1,46 @@
-<section id="videoPlayer">
+<section id="videoPlayer" data-token='{{token}}'>
 	<div class="videoContainer">
 		<div class="videoFrame">
-			<iframe width="560" height="315" src="https://www.youtube.com/embed/wVHAQX5sSaU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+			<iframe id='iframe' width="560" height="315" src="https://www.youtube.com/embed/{{id}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 		</div>
+		<h2 class="title">{{title}}</h2>
+		<h3 class="description">{{description}}</h3>
 	</div>
 	<div class="videoList">
-		<ul class="previewVideolist">
-			<li class="previewPlaylistVideo">
-				<a>
-					<img src="https://i.ytimg.com/vi_webp/wVHAQX5sSaU/sddefault.webp">
-					<h6>Bobby Darin - Dream lover</h6>
-				</a>
-			</li>
-			<li class="previewPlaylistVideo">
-				<a>
-					<img src="https://i.ytimg.com/vi_webp/wVHAQX5sSaU/sddefault.webp">
-					<h6>Bobby Darin - Dream lover</h6>
-				</a>
-			</li>
-			<li class="previewPlaylistVideo">
-				<a>
-					<img src="https://i.ytimg.com/vi_webp/wVHAQX5sSaU/sddefault.webp">
-					<h6>Bobby Darin - Dream lover</h6>
-				</a>
-			</li>
-			<li class="previewPlaylistVideo">
-				<a>
-					<img src="https://i.ytimg.com/vi_webp/wVHAQX5sSaU/sddefault.webp">
-					<h6>Bobby Darin - Dream lover</h6>
-				</a>
-			</li>
-			<li class="previewPlaylistVideo">
-				<a>
-					<img src="https://i.ytimg.com/vi_webp/wVHAQX5sSaU/sddefault.webp">
-					<h6>Bobby Darin - Dream lover</h6>
-				</a>
-			</li>
-			<li class="previewPlaylistVideo">
-				<a>
-					<img src="https://i.ytimg.com/vi_webp/wVHAQX5sSaU/sddefault.webp">
-					<h6>Bobby Darin - Dream lover</h6>
-				</a>
-			</li>
-			<li class="previewPlaylistVideo">
-				<a>
-					<img src="https://i.ytimg.com/vi_webp/wVHAQX5sSaU/sddefault.webp">
-					<h6>Bobby Darin - Dream lover</h6>
-				</a>
-			</li>
-		</ul>
+		<div class="toggleButtonContainer">
+			<button class="toggleButton buttonRight" onclick="showSearchlist()">search results</button>
+			<button class="toggleButton buttonLeft" onclick="showPlaylist()">playlist</button>
+		</div>
+		<div id="videoListContainer" class="overflow">
+			<ul class="previewVideolist">
+				{{#each overview}}
+				<li class="previewPlaylistVideo">
+					<button class="removeVideo">-</button>
+					<a class="container" href="#{{id}}" data-id="{{id}}">
+						<img src="{{thumbnail}}">
+						<div>
+							<h5 class="title">{{title}}</h5>
+							<h6 class="description fade">{{description}}</h6>
+						</div>
+					</a>
+				</li>
+				{{/each}}
+			</ul>
+		</div>
+		<div id="searchVideosContainer" class="overflow">
+			<ul class="previewVideoSearch">
+				<li class="previewPlaylistVideo">
+					<button class="addVideo">+</button>
+					<a class='dataid container' href="#">
+						<img class="thumbnail">
+						<div>
+							<h5 class='title'></h5>
+							<h6 class='description fade'></h6>
+						</div>
+					</a>
+				</li>
+			</ul>
+		</div>
 	</div>
 </section>
 

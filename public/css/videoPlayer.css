@@ -1,6 +1,8 @@
 #videoPlayer {
 	width: 100%;
 	height: auto;
+	max-height: 95vh;
+	min-height: 95vh;
 
 	display: flex;
 	flex-direction: row;
@@ -10,6 +12,9 @@
 .videoContainer {
 	width: 70%;
 	padding: 1rem;
+
+	overflow: scroll;
+	padding-bottom: 3rem;
 }
 
 
@@ -20,7 +25,11 @@
 	padding-top:30px;
 	height:0;
 	overflow:hidden;
+
+	background: rgb(233, 233, 233);
 }
+
+
 
 .videoFrame iframe, .videoFrame object, .videoFrame embed {
 	position:absolute;
@@ -30,14 +39,35 @@
 	height:100%;
 }
 /* End responsive youtube embed */
+.overflow {
+	overflow: scroll;
+	height: auto;
+	max-height: 100%;
+}
 
 .videoList {
 	width: 30%;
+	height: 100%;
+	
+	height: auto;
+	max-height: 100%;
 	padding: 1rem;
+	padding-top: 0;
+	
 	border-left: 1px solid lightgrey;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	padding-bottom: 3rem;
 }
 
-.previewVideolist li {
+/* .videoList ul {
+	height: auto;
+	max-height: 100%;
+} */
+
+.previewVideolist li, .previewVideoSearch li {
 	width: 100%;
 	margin-bottom: 1rem;
 
@@ -46,20 +76,186 @@
 	
 }
 
-.previewPlaylistVideo a {
+.previewPlaylistVideo {
+	position: relative;
+}
+
+.previewPlaylistVideo .container {
 	display: flex;
 	flex-direction: row;
+	text-decoration: none;
 }
 
 .previewPlaylistVideo img {
 	height: 8rem;
 	max-width: 100%;
 	object-fit: cover;
-
 	border-radius: 4px;
 }
 
-.previewPlaylistVideo h6 {
+.previewPlaylistVideo h6, .previewPlaylistVideo h5 {
 	margin: 0;
 	margin-left: 0.5rem;
+	color: black;
 }
+
+.previewPlaylistVideo div {
+	object-fit: contain;
+	overflow: hidden;
+}
+
+.previewPlaylistVideo .title {
+	font-weight: 700;
+	font-size: 0.8rem;
+}
+
+.previewPlaylistVideo .description {
+	font-weight: 300;
+	margin-top: 0.5rem;
+	overflow: hidden;
+}
+
+.fade {
+	position: relative;
+	height: 5.8em; 
+  }
+  .fade:after {
+	content: "";
+	text-align: right;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	width: 70%;
+	height: 1.2em;
+	background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%);
+  }
+
+
+/* ///////////////////////////
+  	Videoplayer title & description
+/////////////////////////// */
+
+.videoContainer .title {
+font-size: 1.6rem;
+color: rgb(46, 46, 47);
+border-bottom: 1px solid lightgray;
+padding: 1rem;
+
+margin: 0;
+}
+
+.videoContainer .description {
+	color: rgb(46, 46, 47);
+	font-size: 0.85rem;
+	font-weight: 500;
+	padding: 0 1rem;
+}
+
+/* ///////////////////////////
+	toggle button
+///////////////////////////*/
+
+.toggleButtonContainer {
+	width: 100%;
+	margin-top: 1rem;
+	position: sticky;
+	top: 0;
+	z-index: 2;
+}
+
+.videoList .toggleButton {
+	float: right;
+	position: sticky;
+	margin-bottom: 1rem;
+	width: 8rem;
+	min-height: 2rem;
+	border: 1px solid rgb(192, 5, 36);
+	width: 50%;
+	outline: none;
+	
+}
+
+.toggleButtonContainer .buttonLeft {
+	border-radius: 4px 0 0 4px;
+	color: white;
+	background: rgb(192, 5, 36);
+}
+
+.toggleButtonContainer .buttonRight {
+	border-radius: 0 4px 4px 0;
+	color: black;
+	background: white;
+}
+
+
+.videoList .toggleButton:hover {
+	cursor: pointer;
+}
+
+#searchVideosContainer {
+	width: 100%;
+	display: none;
+}
+
+.addVideo {
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 1.5rem;
+	width: 1.5rem;
+	background: rgba(255, 255, 255, 0.801);
+	color: green;
+	
+	cursor: pointer;
+	border: none;
+	/* border-left: 1px solid rgb(124, 124, 124);
+	border-top: 1px solid rgb(124, 124, 124); */
+	border-top-left-radius: 4px;
+	border-bottom-right-radius: 4px;
+}
+
+.removeVideo {
+	border: none;
+	/* border-left: 1px solid rgb(124, 124, 124);
+	border-top: 1px solid rgb(124, 124, 124); */
+	border-top-left-radius: 4px;
+	border-bottom-right-radius: 4px;
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 1.5rem;
+	width: 1.5rem;
+	background: rgba(255, 255, 255, 0.801);
+	color: rgb(230, 42, 42);
+	
+	cursor: pointer;
+}
+
+.previewPlaylistVideo:hover > button {
+	display: block;
+}
+
+/* .hoverLinks {
+	display: none;
+	z-index: 1;
+	background: rgba(211, 211, 211, 0.767);
+}
+
+.previewPlaylistVideo:hover .hoverLinks {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	position: absolute;
+	top: 0;
+	height: 100%;
+	width: 100%;
+}
+
+.hoverLinks button {
+	height: 2rem;
+	width: 8rem;
+	cursor: pointer;
+} */
