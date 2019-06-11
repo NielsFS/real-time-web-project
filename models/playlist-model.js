@@ -6,7 +6,7 @@ const playlistSchema = new Schema({
    name: String,
    googleID: String,
    channelID: String,
-//    uri: String,
+   username: String,
    playlistItems: Array,
 })
 

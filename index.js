@@ -10,15 +10,19 @@ const cookieSession = require('cookie-session')
 const passport = require('passport')
 const fetch = require('node-fetch')
 const refresh = require('passport-oauth2-refresh')
+const socket = require('socket.io')
 
 const {google} = require('googleapis')
 const queryString = require('query-string')
 
-var app = express(),
-	server = require('http').createServer(app),
-	socket = require('./socket')
+const app = express()
+const server = app.listen(4000, () => {
+	console.log('server started on port 4000')
+})
 
-const io = require('socket.io').listen(server)
+const socketFolder = require('./socket')
+const io = socket(server)
+socketFolder(io)
 
 
 app.engine('handlebars', hbs({ defaultLayout: 'main' }))
@@ -59,16 +63,20 @@ app.get('/test', (req,res) => {
 	res.send('wut')
 })
 
-let playlist = require('./models/playlist-model')
+app.get('/', (req,res) => {
+	res.redirect('/auth/google')
+})
+
 
 // main route
-app.get('/', authCheck, (req,res) => {
+app.get('/:id', authCheck, (req,res) => {
 
 	let playlist = require('./models/playlist-model')
 
 	let token = req.user.accessToken
 	let googleID = req.user.googleID
 	let channelID = req.user.channelID
+	let username = req.user.username
 	let testPlaylist
 	let testPlaylistID
 	let mappedPlaylistItems 
@@ -152,6 +160,7 @@ app.get('/', authCheck, (req,res) => {
 			new playlist({
 				googleID: googleID,
 				channelID: channelID,
+				username: username,
 				name: 'testPlaylist',
 				playlistItems: mappedPlaylistItems,
 			}).save().then((newPlaylist) => {
@@ -194,9 +203,6 @@ app.get('/', authCheck, (req,res) => {
 	
 	
 
-
-
-
 //////////////////////////////
 // Database
 //////////////////////////////
@@ -209,8 +215,5 @@ mongoose.connect(keys.mongoDB.dbURI, () => {
 // Port
 //////////////////////////////
 
-server.listen(4000, () => {
-	console.log('server started on port 4000')
-})
 
 

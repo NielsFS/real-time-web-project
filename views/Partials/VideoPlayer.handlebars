@@ -1,4 +1,7 @@
 <section id="videoPlayer" data-token='{{token}}'>
+	<div id="popup">
+		<h4>user added video</h4>
+	</div>
 	<div class="videoContainer">
 		<div class="videoFrame">
 			<iframe id='iframe' width="560" height="315" src="https://www.youtube.com/embed/{{id}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -16,8 +19,8 @@
 				{{#each overview}}
 				<li class="previewPlaylistVideo">
 					<button class="removeVideo">-</button>
-					<a class="container" href="#{{id}}" data-id="{{id}}">
-						<img src="{{thumbnail}}">
+					<a class="dataid container" id="{{id}}" href="#{{id}}" data-id="{{id}}">
+						<img class="thumbnail" src="{{thumbnail}}">
 						<div>
 							<h5 class="title">{{title}}</h5>
 							<h6 class="description fade">{{description}}</h6>
@@ -30,7 +33,7 @@
 		<div id="searchVideosContainer" class="overflow">
 			<ul class="previewVideoSearch">
 				<li class="previewPlaylistVideo">
-					<button class="addVideo">+</button>
+					<button class="addVideo">+</button >
 					<a class='dataid container' href="#">
 						<img class="thumbnail">
 						<div>

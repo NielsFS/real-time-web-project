@@ -237,25 +237,31 @@ margin: 0;
 	display: block;
 }
 
-/* .hoverLinks {
-	display: none;
-	z-index: 1;
-	background: rgba(211, 211, 211, 0.767);
-}
 
-.previewPlaylistVideo:hover .hoverLinks {
+#popup {
+	height: 2.5rem;
+	width: 12rem;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	flex-direction: column;
-	position: absolute;
-	top: 0;
-	height: 100%;
-	width: 100%;
+	background: rgb(49, 51, 51);
+
+	position: fixed;
+	left: 1rem;
+	bottom: 1rem;
+	transform: translateY(5rem);
+	opacity: 0;
+	transition: 0.5s ease-in-out;
 }
 
-.hoverLinks button {
-	height: 2rem;
-	width: 8rem;
-	cursor: pointer;
-} */
+#popup h4 {
+	color: white;
+	font-size: 0.7rem;
+	font-weight: 300;
+	text-align: center;
+}
+
+.show #popup {
+	transform: translateY(0);
+	opacity: 1;
+}

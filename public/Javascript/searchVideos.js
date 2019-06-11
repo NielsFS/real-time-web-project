@@ -68,7 +68,6 @@ function fetchVideos() {
 
 function searchYoutube () {
 	
-	console.log(videoObject)
 	let directives = {
 		thumbnail: {
 			src: function() {
@@ -81,22 +80,9 @@ function searchYoutube () {
 				return this.id
 			}
 		},
-
-		// videoId: {
-		
-		// 	title: function() {
-		// 		return this.title
-		// 	},
-		// 	id: function() {
-		// 		return this.id
-		// 	}
-		// 	// ,
-		// 	// thumbnail: function() {
-		// 	// 	return this.thumbnail
-		// 	// }
-		// }
 	}
 	
 	Transparency.render(document.querySelector('.previewVideoSearch'), videoObject, directives)
-	playVideo.addEventListenerPreview()
+	playVideo.addEventListenerSearchVideo()
+	socketInteraction.addVideoListener()
 }
