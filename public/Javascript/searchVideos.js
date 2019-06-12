@@ -52,7 +52,7 @@ function fetchVideos() {
 
 	let searchValue = document.getElementById('searchInput').value;
 
-	var queryurl = `https://www.googleapis.com/youtube/v3/search?access_token=${token}&part=snippet&q=${searchValue}&type=video&videoEmbeddable=true&maxResults=5`;
+	var queryurl = `https://www.googleapis.com/youtube/v3/search?access_token=${token}&part=snippet&q=${searchValue}&type=video&videoEmbeddable=true&maxResults=12`;
 
 	fetch(queryurl)
 	.then(response => response.json()) 
@@ -61,7 +61,6 @@ function fetchVideos() {
 		videoObject = videofetch.map(function (video) {
 			return {title: video.snippet.title, id: video.id.videoId, thumbnail: video.snippet.thumbnails.high.url, description: video.snippet.description} 
 		})
-	console.log(videoObject)
 	searchYoutube()
 	})
 }

@@ -26,7 +26,6 @@ const playVideo = {
 				playerTitle.innerHTML = title
 				playerDescription.innerHTML = description
 		
-				console.log(id + title + thumbnail + description)
 			})
 		}	
 	},
@@ -50,8 +49,6 @@ const playVideo = {
 					iframe.src = `https://www.youtube.com/embed/${id}?autoplay=1`
 					playerTitle.innerHTML = title
 					playerDescription.innerHTML = description
-			
-					console.log(id + title + thumbnail + description)
 
 				})
 			}

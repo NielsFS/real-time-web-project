@@ -31,5 +31,8 @@
     "passport-oauth2-refresh": "^1.1.0",
     "query-string": "^6.5.0",
     "socket.io": "^2.2.0"
+  },
+  "engines": {
+    "node": "10.x"
   }
 }

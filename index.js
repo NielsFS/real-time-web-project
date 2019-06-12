@@ -15,10 +15,15 @@ const socket = require('socket.io')
 const {google} = require('googleapis')
 const queryString = require('query-string')
 
+
+
 const app = express()
-const server = app.listen(4000, () => {
-	console.log('server started on port 4000')
-})
+
+app.set('port', (process.env.PORT || 4000));
+
+const server = app.listen(app.get('port'), function() {
+	console.log('Node app is running on port', app.get('port'));
+  })
 
 const socketFolder = require('./socket')
 const io = socket(server)
@@ -101,10 +106,9 @@ app.get('/:id', authCheck, (req,res) => {
 
 				if (testPlaylist != null) {
 					testPlaylistID = testPlaylist.id
-					console.log('!!!!!!!!' + testPlaylistID)
 					getData.loadPlaylist()
 				} else  {
-					console.log('creating the playlist :)')
+					console.log('creating Youtube Playlist')
 					fetch (`https://www.googleapis.com/youtube/v3/playlists?&access_token=${token}&part=snippet`, {
 
 						method: 'post',
@@ -116,11 +120,8 @@ app.get('/:id', authCheck, (req,res) => {
 
 					})
 					.then((response) => {
-						console.log(response);
 						response.json().then((data) => {
 							testPlaylistID = data.id
-							console.log('playlistID:' + data.id)
-							console.log('playlistID2:' + testPlaylistID)
 							return testPlaylistID
 						})
 						.then( function () {
@@ -164,7 +165,7 @@ app.get('/:id', authCheck, (req,res) => {
 				name: 'testPlaylist',
 				playlistItems: mappedPlaylistItems,
 			}).save().then((newPlaylist) => {
-				console.log('new playlist created:')
+				console.log('new playlist in DB created:')
 			})
 
 		},

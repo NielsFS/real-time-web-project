@@ -18,7 +18,6 @@ const socketInteraction = {
 			for (i = 0; i < addVideo.length; i++) {
 				addVideo[i].setAttribute('listener', 'true')
 				addVideo[i].addEventListener('click', function(e) {
-					console.log('event listener added')
 					e.preventDefault()
 					let selectedElement = this.nextElementSibling
 					
@@ -35,7 +34,7 @@ const socketInteraction = {
 								thumbnail: thumbnail,
 								googleID: googleID
 							}
-					// console.log(videoData)
+				
 					
 					socketInteraction.emitAddVideo()
 					
@@ -47,7 +46,7 @@ const socketInteraction = {
 		const removeButton = document.querySelectorAll('.removeVideo')
 		for (i = 0; i < removeButton.length; i++) {
 			removeButton[i].addEventListener('click', function (e) {
-			
+				e.preventDefault()
 				let videoID = this.nextElementSibling.dataset.id
 				let dataset = {
 					id: videoID,
@@ -91,7 +90,7 @@ socket.on('addVideo', (data) => {
 
 	setTimeout(removePopup, 3000)
 
-	console.log(data)
+
 	// videoContents.push(data)
 
 	let markup = `
@@ -100,7 +99,7 @@ socket.on('addVideo', (data) => {
 			<img class="thumbnail" src="${data.thumbnail}">
 			<div>
 				<h5 class="title">${data.title}</h5>
-				<h6 class="description fade">${data.title}</h6>
+				<h6 class="description fade">${data.description}</h6>
 			</div>
 		</a>
 	`
@@ -110,6 +109,7 @@ socket.on('addVideo', (data) => {
 	li.classList.add('previewPlaylistVideo')
 
 	previewVideolist.appendChild(li)
+	console.log('creating Video')
 
 	let createdVideo = document.getElementById(`${data.id}`)
 	let removeButton = createdVideo.previousElementSibling
